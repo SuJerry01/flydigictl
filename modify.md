@@ -1,4 +1,4 @@
-# 遇到問題 「does not have endpoint with address 0x05」的
+## 遇到問題 「does not have endpoint with address 0x05」的
 
 ```
 執行：flydigictl info
