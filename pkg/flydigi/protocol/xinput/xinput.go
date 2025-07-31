@@ -81,9 +81,14 @@ func Open() (protocol.Protocol, error) {
 	}
 	closers.AddFunc(intf.Close)
 
+	// Try endpoint 5 first (standard Xbox 360 controller), then fallback to endpoint 2
 	outep, err := intf.OutEndpoint(5)
 	if err != nil {
-		return nil, fmt.Errorf("open out endpoint: %w", err)
+		// Fallback to endpoint 2 for some Xbox 360 controllers
+		outep, err = intf.OutEndpoint(2)
+		if err != nil {
+			return nil, fmt.Errorf("open out endpoint: %w", err)
+		}
 	}
 
 	inep, err := intf.InEndpoint(1)
